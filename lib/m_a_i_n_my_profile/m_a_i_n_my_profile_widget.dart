@@ -25,7 +25,7 @@ class MAINMyProfileWidget extends StatefulWidget {
 }
 
 class _MAINMyProfileWidgetState extends State<MAINMyProfileWidget> {
-  List<int> capturedImage;
+  List<bool> capturedImage;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String uploadedFileUrl = '';
 
@@ -234,8 +234,6 @@ class _MAINMyProfileWidgetState extends State<MAINMyProfileWidget> {
                                               onPressed: () async {
                                                 capturedImage = await actions
                                                     .captureScreen();
-                                                await launchURL(
-                                                    'mailto:test@model.com?subject=export%20image&body=imagen${capturedImage.length.toString()}');
 
                                                 setState(() {});
                                               },
