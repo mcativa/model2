@@ -26,7 +26,7 @@ class MAINMyProfileWidget extends StatefulWidget {
 
 class _MAINMyProfileWidgetState extends State<MAINMyProfileWidget> {
   String uploadedFileUrl = '';
-  bool capturedImage;
+  bool captureOK;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -232,8 +232,21 @@ class _MAINMyProfileWidgetState extends State<MAINMyProfileWidget> {
                                                 size: 20,
                                               ),
                                               onPressed: () async {
-                                                capturedImage = await actions
+                                                captureOK = await actions
                                                     .captureScreen();
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'error de plataforma',
+                                                      style: TextStyle(),
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 4000),
+                                                    backgroundColor:
+                                                        Color(0x00000000),
+                                                  ),
+                                                );
 
                                                 setState(() {});
                                               },
