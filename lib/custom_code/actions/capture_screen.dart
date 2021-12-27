@@ -8,7 +8,7 @@ import 'package:screenshot/screenshot.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'dart:typed_data';
 
-Future<List<int>> captureScreen() async {
+Future<bool> captureScreen() async {
   // Add your function code here!
   //Create an instance of ScreenshotController
   ScreenshotController screenshotController = ScreenshotController();
@@ -30,6 +30,6 @@ Future<List<int>> captureScreen() async {
         quality: 60,
         name: "hello");
     print(result);
-    return capturedImage;
+    return true;
   });
 }

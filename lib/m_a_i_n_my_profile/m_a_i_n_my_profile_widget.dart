@@ -25,9 +25,9 @@ class MAINMyProfileWidget extends StatefulWidget {
 }
 
 class _MAINMyProfileWidgetState extends State<MAINMyProfileWidget> {
-  List<bool> capturedImage;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   String uploadedFileUrl = '';
+  bool capturedImage;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
