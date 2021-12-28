@@ -13,6 +13,7 @@ import 'm_a_i_n_saved_jobs/m_a_i_n_saved_jobs_widget.dart';
 import 'm_a_i_n_candidates/m_a_i_n_candidates_widget.dart';
 import 'm_a_i_n_my_profile/m_a_i_n_my_profile_widget.dart';
 import 'm_a_i_n_home/m_a_i_n_home_widget.dart';
+import 'comp_card_template/comp_card_template_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -106,6 +107,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'MAIN_Candidates': MAINCandidatesWidget(),
       'MAIN_MyProfile': MAINMyProfileWidget(),
       'MAINHome': MAINHomeWidget(),
+      'CompCard_Template': CompCardTemplateWidget(),
     };
     return Scaffold(
       body: tabs[_currentPage],
@@ -157,6 +159,14 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: ' ',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.photo_camera_rounded,
+              size: 24,
+            ),
+            label: 'CompCard',
             tooltip: '',
           )
         ],

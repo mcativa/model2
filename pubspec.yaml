@@ -49,6 +49,7 @@ dependencies:
   json_serializable: 4.1.4
   mime_type: 1.0.0
   page_transition: 2.0.4
+  photo_view: ^0.13.0
   rxdart: 0.26.0
   screenshot: ^1.2.3
   share_plus: ^2.1.4
