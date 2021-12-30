@@ -787,6 +787,11 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                               modelMeasureWaist: measureWaistValue,
                               modelMeasureHips: measureHipsValue,
                               modelHairColor: eyeColorDropDownValue,
+                              modelEyesColor: eyeColorDropDownValue,
+                              modelHeightFeet:
+                                  int.parse('${heightFtValue.toString()}'),
+                              modelHeightIn:
+                                  int.parse('${heightInValue.toString()}'),
                             );
                             await editModelProfileUsersRecord.reference
                                 .update(usersUpdateData);
