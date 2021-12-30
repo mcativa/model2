@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -291,26 +292,29 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                           heightFtValue.toString(),
                                           style: FlutterFlowTheme.bodyText2,
                                         ),
-                                        AuthUserStreamWidget(
-                                          child: Container(
-                                            width: double.infinity,
-                                            child: Slider(
-                                              activeColor: FlutterFlowTheme
-                                                  .secondaryColor,
-                                              inactiveColor: Color(0xFF9E9E9E),
-                                              min: 3,
-                                              max: 7,
-                                              value: heightFtValue ??=
-                                                  currentUserDocument
-                                                      ?.modelHeightFeet
-                                                      .toDouble(),
-                                              label: heightFtValue.toString(),
-                                              divisions: 4,
-                                              onChanged: (newValue) {
-                                                setState(() =>
-                                                    heightFtValue = newValue);
-                                              },
-                                            ),
+                                        Container(
+                                          width: double.infinity,
+                                          child: Slider(
+                                            activeColor:
+                                                FlutterFlowTheme.secondaryColor,
+                                            inactiveColor: Color(0xFF9E9E9E),
+                                            min: 3,
+                                            max: 7,
+                                            value: heightFtValue ??= functions
+                                                .validateRangeInt(
+                                                    3,
+                                                    7,
+                                                    5,
+                                                    editModelProfileUsersRecord
+                                                        .modelHeightFeet)
+                                                .toDouble()
+                                                .toDouble(),
+                                            label: heightFtValue.toString(),
+                                            divisions: 4,
+                                            onChanged: (newValue) {
+                                              setState(() =>
+                                                  heightFtValue = newValue);
+                                            },
                                           ),
                                         ),
                                       ],
@@ -336,10 +340,15 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                           inactiveColor: Color(0xFF9E9E9E),
                                           min: 0,
                                           max: 13,
-                                          value: heightInValue ??=
-                                              editModelProfileUsersRecord
-                                                  .modelHeightIn
-                                                  .toDouble(),
+                                          value: heightInValue ??= functions
+                                              .validateRangeInt(
+                                                  0,
+                                                  12,
+                                                  7,
+                                                  editModelProfileUsersRecord
+                                                      .modelHeightIn)
+                                              .toDouble()
+                                              .toDouble(),
                                           label: heightInValue.toString(),
                                           divisions: 0,
                                           onChanged: (newValue) {

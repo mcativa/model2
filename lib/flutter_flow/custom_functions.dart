@@ -16,3 +16,13 @@ String getModelMeasuresStr(UsersRecord userRecord) {
   final modelMeasureHips = userRecord.modelMeasureHips;
   return 'B: $modelMeasureBust W: $modelMeasureWaist H: $modelMeasureHips';
 }
+
+int validateRangeInt(
+  int min,
+  int max,
+  int def,
+  int value,
+) {
+  // check value is between min and max, if not, return default value
+  return max >= value && value >= min ? value : def;
+}
