@@ -32,8 +32,7 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
   String uploadedFileUrl = '';
   TextEditingController textController1;
   TextEditingController textController2;
-  double heightFtValue;
-  double heightInValue;
+  double heightCmValue;
   double measureBustValue;
   double measureWaistValue;
   double measureHipsValue;
@@ -288,9 +287,21 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          heightFtValue.toString(),
-                                          style: FlutterFlowTheme.bodyText2,
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                              heightCmValue.toString(),
+                                              style: FlutterFlowTheme.bodyText2,
+                                            ),
+                                            Text(
+                                              heightCmValue.toString(),
+                                              textAlign: TextAlign.end,
+                                              style: FlutterFlowTheme.bodyText2,
+                                            ),
+                                          ],
                                         ),
                                         Container(
                                           width: double.infinity,
@@ -298,63 +309,22 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                             activeColor:
                                                 FlutterFlowTheme.secondaryColor,
                                             inactiveColor: Color(0xFF9E9E9E),
-                                            min: 3,
-                                            max: 7,
-                                            value: heightFtValue ??= functions
-                                                .validateRangeInt(
-                                                    3,
-                                                    7,
-                                                    5,
+                                            min: 30,
+                                            max: 220,
+                                            value: heightCmValue ??=
+                                                functions.validateRangeDbl(
+                                                    30.0,
+                                                    220.0,
+                                                    170.0,
                                                     editModelProfileUsersRecord
-                                                        .modelHeightFeet)
-                                                .toDouble()
-                                                .toDouble(),
-                                            label: heightFtValue.toString(),
-                                            divisions: 4,
+                                                        .modelHeightCm),
+                                            label: heightCmValue.toString(),
+                                            divisions: 190,
                                             onChanged: (newValue) {
                                               setState(() =>
-                                                  heightFtValue = newValue);
+                                                  heightCmValue = newValue);
                                             },
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Align(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          heightInValue.toString(),
-                                          textAlign: TextAlign.end,
-                                          style: FlutterFlowTheme.bodyText2,
-                                        ),
-                                        Slider(
-                                          activeColor:
-                                              FlutterFlowTheme.secondaryColor,
-                                          inactiveColor: Color(0xFF9E9E9E),
-                                          min: 0,
-                                          max: 13,
-                                          value: heightInValue ??= functions
-                                              .validateRangeInt(
-                                                  0,
-                                                  12,
-                                                  7,
-                                                  editModelProfileUsersRecord
-                                                      .modelHeightIn)
-                                              .toDouble()
-                                              .toDouble(),
-                                          label: heightInValue.toString(),
-                                          divisions: 13,
-                                          onChanged: (newValue) {
-                                            setState(
-                                                () => heightInValue = newValue);
-                                          },
                                         ),
                                       ],
                                     ),
@@ -550,11 +520,6 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                               ),
                             ),
                           ],
-                        ),
-                        Divider(
-                          height: 2,
-                          thickness: 1,
-                          color: FlutterFlowTheme.lineColor,
                         ),
                         Divider(
                           height: 2,
@@ -788,10 +753,7 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                               modelMeasureHips: measureHipsValue,
                               modelHairColor: eyeColorDropDownValue,
                               modelEyesColor: eyeColorDropDownValue,
-                              modelHeightFeet:
-                                  int.parse('${heightFtValue.toString()}'),
-                              modelHeightIn:
-                                  int.parse('${heightInValue.toString()}'),
+                              modelHeightCm: heightCmValue,
                             );
                             await editModelProfileUsersRecord.reference
                                 .update(usersUpdateData);

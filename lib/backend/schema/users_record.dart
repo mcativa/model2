@@ -47,14 +47,6 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   bool get isGuest;
 
   @nullable
-  @BuiltValueField(wireName: 'model_height_feet')
-  int get modelHeightFeet;
-
-  @nullable
-  @BuiltValueField(wireName: 'model_height_in')
-  int get modelHeightIn;
-
-  @nullable
   @BuiltValueField(wireName: 'model_hair_color')
   String get modelHairColor;
 
@@ -86,6 +78,10 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   LatLng get location;
 
   @nullable
+  @BuiltValueField(wireName: 'model_height_cm')
+  double get modelHeightCm;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -100,14 +96,13 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..likedPosts = false
     ..profileType = ''
     ..isGuest = false
-    ..modelHeightFeet = 0
-    ..modelHeightIn = 0
     ..modelHairColor = ''
     ..modelEyesColor = ''
     ..modelSkinColor = ''
     ..modelMeasureBust = 0.0
     ..modelMeasureWaist = 0.0
-    ..modelMeasureHips = 0.0;
+    ..modelMeasureHips = 0.0
+    ..modelHeightCm = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -134,8 +129,6 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
           ..likedPosts = snapshot.data['likedPosts']
           ..profileType = snapshot.data['profileType']
           ..isGuest = snapshot.data['isGuest']
-          ..modelHeightFeet = snapshot.data['model_height_feet']
-          ..modelHeightIn = snapshot.data['model_height_in']
           ..modelHairColor = snapshot.data['model_hair_color']
           ..modelEyesColor = snapshot.data['model_eyes_color']
           ..modelSkinColor = snapshot.data['model_skin_color']
@@ -148,6 +141,7 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
                 snapshot.data['_geoloc']['lat'],
                 snapshot.data['_geoloc']['lng'],
               ))
+          ..modelHeightCm = snapshot.data['model_height_cm']
           ..reference = UsersRecord.collection.doc(snapshot.objectID),
       );
 
@@ -188,8 +182,6 @@ Map<String, dynamic> createUsersRecordData({
   bool likedPosts,
   String profileType,
   bool isGuest,
-  int modelHeightFeet,
-  int modelHeightIn,
   String modelHairColor,
   String modelEyesColor,
   String modelSkinColor,
@@ -198,6 +190,7 @@ Map<String, dynamic> createUsersRecordData({
   double modelMeasureHips,
   DateTime modelDoB,
   LatLng location,
+  double modelHeightCm,
 }) =>
     serializers.toFirestore(
         UsersRecord.serializer,
@@ -213,8 +206,6 @@ Map<String, dynamic> createUsersRecordData({
           ..likedPosts = likedPosts
           ..profileType = profileType
           ..isGuest = isGuest
-          ..modelHeightFeet = modelHeightFeet
-          ..modelHeightIn = modelHeightIn
           ..modelHairColor = modelHairColor
           ..modelEyesColor = modelEyesColor
           ..modelSkinColor = modelSkinColor
@@ -222,4 +213,5 @@ Map<String, dynamic> createUsersRecordData({
           ..modelMeasureWaist = modelMeasureWaist
           ..modelMeasureHips = modelMeasureHips
           ..modelDoB = modelDoB
-          ..location = location));
+          ..location = location
+          ..modelHeightCm = modelHeightCm));

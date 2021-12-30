@@ -279,7 +279,7 @@ class _SEARCHCandidatesWidgetState extends State<SEARCHCandidatesWidget> {
                                                 children: [
                                                   Text(
                                                     containerUsersRecord
-                                                        .modelHeightFeet
+                                                        .modelHeightCm
                                                         .toString(),
                                                     style: FlutterFlowTheme
                                                         .bodyText2,

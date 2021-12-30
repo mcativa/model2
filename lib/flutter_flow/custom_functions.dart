@@ -17,11 +17,11 @@ String getModelMeasuresStr(UsersRecord userRecord) {
   return 'B: $modelMeasureBust W: $modelMeasureWaist H: $modelMeasureHips';
 }
 
-int validateRangeInt(
-  int min,
-  int max,
-  int def,
-  int value,
+double validateRangeDbl(
+  double min,
+  double max,
+  double def,
+  double value,
 ) {
   // check value is between min and max, if not, return default value
   return max >= value && value >= min ? value : def;
