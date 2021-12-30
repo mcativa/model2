@@ -26,3 +26,14 @@ double validateRangeDbl(
   // check value is between min and max, if not, return default value
   return max >= value && value >= min ? value : def;
 }
+
+String cm2ftStr(double cm) {
+  // convert cm to feet and inches string
+  double inches = cm * 0.39370104;
+  int feet = inches.floor();
+  double remainder = inches - feet;
+  inches = remainder * 12;
+  String feetStr = feet.toStringAsFixed(0);
+  String inchesStr = inches.toStringAsFixed(0);
+  return '$feetStr\' $inchesStr "';
+}

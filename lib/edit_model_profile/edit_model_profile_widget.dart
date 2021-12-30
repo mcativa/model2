@@ -297,7 +297,7 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                               style: FlutterFlowTheme.bodyText2,
                                             ),
                                             Text(
-                                              heightCmValue.toString(),
+                                              functions.cm2ftStr(heightCmValue),
                                               textAlign: TextAlign.end,
                                               style: FlutterFlowTheme.bodyText2,
                                             ),
@@ -318,7 +318,6 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                                     170.0,
                                                     editModelProfileUsersRecord
                                                         .modelHeightCm),
-                                            label: heightCmValue.toString(),
                                             divisions: 190,
                                             onChanged: (newValue) {
                                               setState(() =>
