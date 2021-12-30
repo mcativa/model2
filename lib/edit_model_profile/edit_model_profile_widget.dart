@@ -350,7 +350,7 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                               .toDouble()
                                               .toDouble(),
                                           label: heightInValue.toString(),
-                                          divisions: 0,
+                                          divisions: 13,
                                           onChanged: (newValue) {
                                             setState(
                                                 () => heightInValue = newValue);
