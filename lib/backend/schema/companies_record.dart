@@ -58,6 +58,10 @@ abstract class CompaniesRecord
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<CompaniesRecord> getDocumentOnce(DocumentReference ref) => ref
+      .get()
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   CompaniesRecord._();
   factory CompaniesRecord([void Function(CompaniesRecordBuilder) updates]) =
       _$CompaniesRecord;

@@ -310,7 +310,7 @@ class _MAINSavedJobsWidgetState extends State<MAINSavedJobsWidget> {
                                                                   Text(
                                                                     valueOrDefault<
                                                                         String>(
-                                                                      '\$${jobPostCardJobPostsRecord.salary}k',
+                                                                      '\$',
                                                                       'k',
                                                                     ),
                                                                     style: FlutterFlowTheme
@@ -526,7 +526,7 @@ class _MAINSavedJobsWidgetState extends State<MAINSavedJobsWidget> {
                                                                 ),
                                                               ),
                                                               Text(
-                                                                '\$${listViewJobPostsRecord.salary}k',
+                                                                '\$k',
                                                                 style: FlutterFlowTheme
                                                                     .bodyText1
                                                                     .override(

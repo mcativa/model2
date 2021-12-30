@@ -239,7 +239,7 @@ class _JobPostSubmitApplicationWidgetState
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         8, 0, 0, 0),
                                     child: Text(
-                                      '\$${jobPostSubmitApplicationJobPostsRecord.salary}k',
+                                      '\$k',
                                       style:
                                           FlutterFlowTheme.bodyText2.override(
                                         fontFamily: 'Lexend Deca',

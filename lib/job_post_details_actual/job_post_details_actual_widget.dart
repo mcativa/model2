@@ -277,7 +277,7 @@ class _JobPostDetailsActualWidgetState
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         8, 0, 0, 0),
                                     child: Text(
-                                      '\$${jobPostDetailsActualJobPostsRecord.salary}k',
+                                      '\$k',
                                       style:
                                           FlutterFlowTheme.bodyText2.override(
                                         fontFamily: 'Lexend Deca',

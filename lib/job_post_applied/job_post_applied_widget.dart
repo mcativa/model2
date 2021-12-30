@@ -203,7 +203,7 @@ class _JobPostAppliedWidgetState extends State<JobPostAppliedWidget> {
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                             child: Text(
-                              '\$${jobPostAppliedJobPostsRecord.salary}k',
+                              '\$k',
                               style: FlutterFlowTheme.bodyText2.override(
                                 fontFamily: 'Lexend Deca',
                                 color: FlutterFlowTheme.primaryColor,

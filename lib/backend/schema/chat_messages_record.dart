@@ -41,6 +41,10 @@ abstract class ChatMessagesRecord
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<ChatMessagesRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then(
+          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   ChatMessagesRecord._();
   factory ChatMessagesRecord(
           [void Function(ChatMessagesRecordBuilder) updates]) =

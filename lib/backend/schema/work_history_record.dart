@@ -49,6 +49,10 @@ abstract class WorkHistoryRecord
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<WorkHistoryRecord> getDocumentOnce(DocumentReference ref) => ref
+      .get()
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   WorkHistoryRecord._();
   factory WorkHistoryRecord([void Function(WorkHistoryRecordBuilder) updates]) =
       _$WorkHistoryRecord;

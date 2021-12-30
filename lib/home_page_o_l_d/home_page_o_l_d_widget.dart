@@ -850,7 +850,7 @@ class _HomePageOLDWidgetState extends State<HomePageOLDWidget> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    '\$${listViewJobPostsRecord.salary}k',
+                                                    '\$k',
                                                     style: FlutterFlowTheme
                                                         .bodyText1
                                                         .override(

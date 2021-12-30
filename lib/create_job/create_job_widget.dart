@@ -543,7 +543,6 @@ class _CreateJobWidgetState extends State<CreateJobWidget> {
                       jobName: textController1.text,
                       jobDescription: shortDescriptionController.text,
                       jobCompany: '',
-                      salary: salaryRangeValue.toString(),
                       timeCreated: getCurrentTimestamp,
                       jobLocation: placePickerValue.latLng,
                       postedBy: currentUserReference,

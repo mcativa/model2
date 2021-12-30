@@ -52,6 +52,10 @@ abstract class AppliedJobsRecord
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<AppliedJobsRecord> getDocumentOnce(DocumentReference ref) => ref
+      .get()
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   AppliedJobsRecord._();
   factory AppliedJobsRecord([void Function(AppliedJobsRecordBuilder) updates]) =
       _$AppliedJobsRecord;

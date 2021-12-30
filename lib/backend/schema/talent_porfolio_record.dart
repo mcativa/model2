@@ -32,6 +32,10 @@ abstract class TalentPorfolioRecord
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<TalentPorfolioRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then(
+          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   TalentPorfolioRecord._();
   factory TalentPorfolioRecord(
           [void Function(TalentPorfolioRecordBuilder) updates]) =

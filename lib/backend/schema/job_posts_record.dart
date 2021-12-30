@@ -18,9 +18,6 @@ abstract class JobPostsRecord
   String get jobCompany;
 
   @nullable
-  String get salary;
-
-  @nullable
   String get jobDescription;
 
   @nullable
@@ -57,7 +54,6 @@ abstract class JobPostsRecord
   static void _initializeBuilder(JobPostsRecordBuilder builder) => builder
     ..jobName = ''
     ..jobCompany = ''
-    ..salary = ''
     ..jobDescription = ''
     ..likedPost = false
     ..jobRequirements = ''
@@ -73,12 +69,15 @@ abstract class JobPostsRecord
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<JobPostsRecord> getDocumentOnce(DocumentReference ref) => ref
+      .get()
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   static JobPostsRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
       JobPostsRecord(
         (c) => c
           ..jobName = snapshot.data['jobName']
           ..jobCompany = snapshot.data['jobCompany']
-          ..salary = snapshot.data['salary']
           ..jobDescription = snapshot.data['jobDescription']
           ..timeCreated = safeGet(() =>
               DateTime.fromMillisecondsSinceEpoch(snapshot.data['timeCreated']))
@@ -124,7 +123,6 @@ abstract class JobPostsRecord
 Map<String, dynamic> createJobPostsRecordData({
   String jobName,
   String jobCompany,
-  String salary,
   String jobDescription,
   DateTime timeCreated,
   LatLng jobLocation,
@@ -141,7 +139,6 @@ Map<String, dynamic> createJobPostsRecordData({
         JobPostsRecord((j) => j
           ..jobName = jobName
           ..jobCompany = jobCompany
-          ..salary = salary
           ..jobDescription = jobDescription
           ..timeCreated = timeCreated
           ..jobLocation = jobLocation

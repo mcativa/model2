@@ -1,6 +1,6 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../custom_code/widgets/index.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -99,7 +99,7 @@ class _CompCardTemplateWidgetState extends State<CompCardTemplateWidget> {
                       decoration: BoxDecoration(
                         color: Color(0xFFDC7832),
                       ),
-                      child: Photoview(
+                      child: custom_widgets.Photoview(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 1,
                       ),

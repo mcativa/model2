@@ -33,6 +33,10 @@ abstract class SavedJobsRecord
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<SavedJobsRecord> getDocumentOnce(DocumentReference ref) => ref
+      .get()
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   SavedJobsRecord._();
   factory SavedJobsRecord([void Function(SavedJobsRecordBuilder) updates]) =
       _$SavedJobsRecord;

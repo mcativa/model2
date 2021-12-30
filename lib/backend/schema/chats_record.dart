@@ -52,6 +52,10 @@ abstract class ChatsRecord implements Built<ChatsRecord, ChatsRecordBuilder> {
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<ChatsRecord> getDocumentOnce(DocumentReference ref) => ref
+      .get()
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   ChatsRecord._();
   factory ChatsRecord([void Function(ChatsRecordBuilder) updates]) =
       _$ChatsRecord;

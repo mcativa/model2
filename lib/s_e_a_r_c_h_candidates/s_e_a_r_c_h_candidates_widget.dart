@@ -278,10 +278,9 @@ class _SEARCHCandidatesWidgetState extends State<SEARCHCandidatesWidget> {
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
                                                   Text(
-                                                    dateTimeFormat(
-                                                        'd/M/y',
-                                                        containerUsersRecord
-                                                            .dob),
+                                                    containerUsersRecord
+                                                        .modelHeightFeet
+                                                        .toString(),
                                                     style: FlutterFlowTheme
                                                         .bodyText2,
                                                   ),

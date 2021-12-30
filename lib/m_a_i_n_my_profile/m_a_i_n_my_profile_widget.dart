@@ -2,7 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../company_details/company_details_widget.dart';
-import '../edit_profile/edit_profile_widget.dart';
+import '../edit_model_profile/edit_model_profile_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -284,7 +284,7 @@ class _MAINMyProfileWidgetState extends State<MAINMyProfileWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        EditProfileWidget(
+                                                        EditModelProfileWidget(
                                                       userProfile:
                                                           mAINMyProfileUsersRecord
                                                               .reference,

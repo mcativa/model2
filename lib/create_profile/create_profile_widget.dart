@@ -1,17 +1,17 @@
-import '../add_work_exp/add_work_exp_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../backend/firebase_storage/storage.dart';
 import '../company_profile/company_profile_widget.dart';
-import '../flutter_flow/flutter_flow_drop_down.dart';
+import '../edit_model_profile/edit_model_profile_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import '../home_page_o_l_d/home_page_o_l_d_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateProfileWidget extends StatefulWidget {
@@ -22,10 +22,9 @@ class CreateProfileWidget extends StatefulWidget {
 }
 
 class _CreateProfileWidgetState extends State<CreateProfileWidget> {
-  String dropDownValue;
+  String uploadedFileUrl = '';
   TextEditingController textController1;
   TextEditingController textController2;
-  TextEditingController textController3;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -33,7 +32,6 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
     super.initState();
     textController1 = TextEditingController();
     textController2 = TextEditingController();
-    textController3 = TextEditingController();
   }
 
   @override
@@ -87,8 +85,34 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           color: FlutterFlowTheme.grayIcon400,
                           size: 30,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
+                        onPressed: () async {
+                          final selectedMedia =
+                              await selectMediaWithSourceBottomSheet(
+                            context: context,
+                            allowPhoto: true,
+                          );
+                          if (selectedMedia != null &&
+                              validateFileFormat(
+                                  selectedMedia.storagePath, context)) {
+                            showUploadMessage(context, 'Uploading file...',
+                                showLoading: true);
+                            final downloadUrl = await uploadData(
+                                selectedMedia.storagePath, selectedMedia.bytes);
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            if (downloadUrl != null) {
+                              setState(() => uploadedFileUrl = downloadUrl);
+                              showUploadMessage(context, 'Success!');
+                            } else {
+                              showUploadMessage(
+                                  context, 'Failed to upload media');
+                              return;
+                            }
+                          }
+
+                          final usersUpdateData = createUsersRecordData(
+                            photoUrl: uploadedFileUrl,
+                          );
+                          await currentUserReference.update(usersUpdateData);
                         },
                       ),
                     ),
@@ -140,51 +164,6 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                 thickness: 1,
                 color: FlutterFlowTheme.lineColor,
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 8, 0, 0),
-                      child: TextFormField(
-                        controller: textController2,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: 'Postition Title',
-                          labelStyle: FlutterFlowTheme.title3.override(
-                            fontFamily: 'Lexend Deca',
-                            color: FlutterFlowTheme.grayIcon400,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.lineColor,
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.lineColor,
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                        ),
-                        style: FlutterFlowTheme.title3.override(
-                          fontFamily: 'Lexend Deca',
-                          color: FlutterFlowTheme.darkText,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                 child: Row(
@@ -194,10 +173,10 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                         child: TextFormField(
-                          controller: textController3,
+                          controller: textController2,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Short Description',
+                            labelText: 'Short Description & Bio',
                             labelStyle: FlutterFlowTheme.subtitle2.override(
                               fontFamily: 'Lexend Deca',
                               color: FlutterFlowTheme.grayIcon400,
@@ -239,52 +218,6 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                 height: 2,
                 thickness: 1,
                 color: FlutterFlowTheme.lineColor,
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                      ),
-                      child: FlutterFlowDropDown(
-                        initialOption: dropDownValue ??= 'Experience Level',
-                        options: [
-                          '< 6 Months',
-                          '6m - 1y',
-                          '1y - 3y',
-                          '+3 years',
-                          '+5 years',
-                          '+8 years'
-                        ].toList(),
-                        onChanged: (val) => setState(() => dropDownValue = val),
-                        width: 130,
-                        height: 40,
-                        textStyle: FlutterFlowTheme.subtitle2.override(
-                          fontFamily: 'Lexend Deca',
-                          color: FlutterFlowTheme.grayIcon,
-                        ),
-                        icon: FaIcon(
-                          FontAwesomeIcons.chevronDown,
-                          color: FlutterFlowTheme.grayIcon400,
-                          size: 16,
-                        ),
-                        fillColor: Colors.white,
-                        elevation: 0,
-                        borderColor: Colors.transparent,
-                        borderWidth: 0,
-                        borderRadius: 0,
-                        margin: EdgeInsetsDirectional.fromSTEB(8, 4, 8, 4),
-                        hidesUnderline: true,
-                      ),
-                    ),
-                  ],
-                ),
               ),
               Divider(
                 height: 2,
@@ -330,13 +263,13 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                     onTap: () async {
                       final usersUpdateData = createUsersRecordData(
                         displayName: textController1.text,
-                        bio: textController3.text,
+                        bio: textController2.text,
                       );
                       await currentUserReference.update(usersUpdateData);
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AddWorkExpWidget(),
+                          builder: (context) => EditModelProfileWidget(),
                         ),
                       );
                     },
@@ -397,7 +330,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                       onTap: () async {
                         final usersUpdateData = createUsersRecordData(
                           displayName: textController1.text,
-                          bio: textController3.text,
+                          bio: textController2.text,
                         );
                         await currentUserReference.update(usersUpdateData);
                         await Navigator.push(

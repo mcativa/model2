@@ -300,7 +300,7 @@ class _SEARCHJobsWidgetState extends State<SEARCHJobsWidget> {
                                                       ),
                                                     ),
                                                     Text(
-                                                      '\$${listViewJobPostsRecord.salary}k',
+                                                      '\$k',
                                                       style: FlutterFlowTheme
                                                           .bodyText1
                                                           .override(

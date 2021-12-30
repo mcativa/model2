@@ -67,9 +67,6 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   String get modelSkinColor;
 
   @nullable
-  DateTime get dob;
-
-  @nullable
   @BuiltValueField(wireName: 'model_measure_bust')
   double get modelMeasureBust;
 
@@ -80,6 +77,13 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   @nullable
   @BuiltValueField(wireName: 'model_measure_hips')
   double get modelMeasureHips;
+
+  @nullable
+  @BuiltValueField(wireName: 'model_DoB')
+  DateTime get modelDoB;
+
+  @nullable
+  LatLng get location;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -112,6 +116,10 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<UsersRecord> getDocumentOnce(DocumentReference ref) => ref
+      .get()
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   static UsersRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) => UsersRecord(
         (c) => c
           ..displayName = snapshot.data['display_name']
@@ -131,11 +139,15 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
           ..modelHairColor = snapshot.data['model_hair_color']
           ..modelEyesColor = snapshot.data['model_eyes_color']
           ..modelSkinColor = snapshot.data['model_skin_color']
-          ..dob = safeGet(
-              () => DateTime.fromMillisecondsSinceEpoch(snapshot.data['dob']))
           ..modelMeasureBust = snapshot.data['model_measure_bust']
           ..modelMeasureWaist = snapshot.data['model_measure_waist']
           ..modelMeasureHips = snapshot.data['model_measure_hips']
+          ..modelDoB = safeGet(() =>
+              DateTime.fromMillisecondsSinceEpoch(snapshot.data['model_DoB']))
+          ..location = safeGet(() => LatLng(
+                snapshot.data['_geoloc']['lat'],
+                snapshot.data['_geoloc']['lng'],
+              ))
           ..reference = UsersRecord.collection.doc(snapshot.objectID),
       );
 
@@ -181,10 +193,11 @@ Map<String, dynamic> createUsersRecordData({
   String modelHairColor,
   String modelEyesColor,
   String modelSkinColor,
-  DateTime dob,
   double modelMeasureBust,
   double modelMeasureWaist,
   double modelMeasureHips,
+  DateTime modelDoB,
+  LatLng location,
 }) =>
     serializers.toFirestore(
         UsersRecord.serializer,
@@ -205,7 +218,8 @@ Map<String, dynamic> createUsersRecordData({
           ..modelHairColor = modelHairColor
           ..modelEyesColor = modelEyesColor
           ..modelSkinColor = modelSkinColor
-          ..dob = dob
           ..modelMeasureBust = modelMeasureBust
           ..modelMeasureWaist = modelMeasureWaist
-          ..modelMeasureHips = modelMeasureHips));
+          ..modelMeasureHips = modelMeasureHips
+          ..modelDoB = modelDoB
+          ..location = location));

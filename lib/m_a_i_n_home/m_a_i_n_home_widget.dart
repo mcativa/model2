@@ -261,7 +261,7 @@ class _MAINHomeWidgetState extends State<MAINHomeWidget> {
                                                       ),
                                                     ),
                                                     Text(
-                                                      '\$${jobPostCardJobPostsRecord.salary}k',
+                                                      '\$k',
                                                       style: FlutterFlowTheme
                                                           .bodyText1
                                                           .override(
