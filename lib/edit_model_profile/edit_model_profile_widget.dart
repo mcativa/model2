@@ -269,84 +269,6 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Height',
-                                style: FlutterFlowTheme.bodyText2,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 4, 16, 4),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Align(
-                                    alignment: AlignmentDirectional(-1, 0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(
-                                              heightCmValue.toString(),
-                                              style: FlutterFlowTheme.bodyText2,
-                                            ),
-                                            Text(
-                                              functions.cm2ftStr(heightCmValue),
-                                              textAlign: TextAlign.end,
-                                              style: FlutterFlowTheme.bodyText2,
-                                            ),
-                                          ],
-                                        ),
-                                        Container(
-                                          width: double.infinity,
-                                          child: Slider(
-                                            activeColor:
-                                                FlutterFlowTheme.secondaryColor,
-                                            inactiveColor: Color(0xFF9E9E9E),
-                                            min: 30,
-                                            max: 220,
-                                            value: heightCmValue ??=
-                                                functions.validateRangeDbl(
-                                                    30.0,
-                                                    220.0,
-                                                    170.0,
-                                                    editModelProfileUsersRecord
-                                                        .modelHeightCm),
-                                            divisions: 190,
-                                            onChanged: (newValue) {
-                                              setState(() =>
-                                                  heightCmValue = newValue);
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
                         Divider(
                           height: 2,
                           thickness: 1,
@@ -361,6 +283,59 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                 'Measures\n',
                                 style: FlutterFlowTheme.bodyText2,
                               ),
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      15, 0, 0, 0),
+                                  child: Text(
+                                    'Height',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.bodyText2,
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      heightCmValue.toString(),
+                                      style: FlutterFlowTheme.bodyText2,
+                                    ),
+                                    Text(
+                                      functions.cm2ftStr(heightCmValue),
+                                      textAlign: TextAlign.end,
+                                      style: FlutterFlowTheme.bodyText2,
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  child: Slider(
+                                    activeColor:
+                                        FlutterFlowTheme.secondaryColor,
+                                    inactiveColor: Color(0xFF9E9E9E),
+                                    min: 30,
+                                    max: 220,
+                                    value: heightCmValue ??=
+                                        functions.validateRangeDbl(
+                                            30.0,
+                                            220.0,
+                                            170.0,
+                                            editModelProfileUsersRecord
+                                                .modelHeightCm),
+                                    divisions: 190,
+                                    onChanged: (newValue) {
+                                      setState(() => heightCmValue = newValue);
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                             Align(
                               alignment: AlignmentDirectional(0, 0),
@@ -608,6 +583,10 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                             ],
                           ),
                         ),
+                        Divider(
+                          height: 2,
+                          thickness: 1,
+                        ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                           child: Column(
@@ -757,9 +736,12 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                         color: Colors.white,
                                       ),
                                       child: FlutterFlowPlacePicker(
-                                        iOSGoogleMapsApiKey: '',
-                                        androidGoogleMapsApiKey: '',
-                                        webGoogleMapsApiKey: '',
+                                        iOSGoogleMapsApiKey:
+                                            'AIzaSyAxDiM-pb25n7v_Wri44kX9XADzL_b_cf0',
+                                        androidGoogleMapsApiKey:
+                                            'AIzaSyDI4tMlTv1pTvoQmFPFuJCO9gwbOxVEa7E',
+                                        webGoogleMapsApiKey:
+                                            'AIzaSyANDKgk6PrLJOP7Qawv3CxG8jlvVxXjrv8',
                                         onSelect: (place) => setState(
                                             () => placePickerValue = place),
                                         defaultText: 'Select Location',

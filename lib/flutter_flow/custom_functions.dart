@@ -32,11 +32,13 @@ String cm2ftStr(double cm) {
   double cms = 0;
   if (cm == null) {
     return '0\' 0"';
+  } else {
+    cms = cm;
   }
-  double feet = cm / 30.48;
+  double feet = cms / 30.48;
   double inches = feet % 1;
   feet = feet - inches;
 
   inches = inches * 12;
-  return '${feet.toStringAsFixed(0)}`$inches`';
+  return '${feet.toStringAsFixed(0)}" ${inches.toStringAsFixed(0)}`';
 }
