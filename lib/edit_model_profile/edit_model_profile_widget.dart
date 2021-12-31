@@ -1,11 +1,15 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
+import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
+import '../flutter_flow/flutter_flow_place_picker.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/place.dart';
 import '../flutter_flow/upload_media.dart';
+import 'dart:io';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,6 +31,7 @@ class EditModelProfileWidget extends StatefulWidget {
 }
 
 class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
+  DateTimeRange calendarSelectedDay;
   String eyeColorDropDownValue;
   String hairColorDropDownValue;
   String uploadedFileUrl = '';
@@ -36,8 +41,17 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
   double measureBustValue;
   double measureWaistValue;
   double measureHipsValue;
-  TextEditingController textController3;
+  var placePickerValue = FFPlace();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    calendarSelectedDay = DateTimeRange(
+      start: DateTime.now().startOfDay,
+      end: DateTime.now().endOfDay,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -670,52 +684,108 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                          child: Row(
+                          child: Column(
                             mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
-                                  child: TextFormField(
-                                    controller: textController3 ??=
-                                        TextEditingController(
-                                      text: editModelProfileUsersRecord.email,
-                                    ),
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Email',
-                                      labelStyle:
-                                          FlutterFlowTheme.subtitle2.override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: FlutterFlowTheme.grayIcon400,
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.lineColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.lineColor,
-                                          width: 1,
-                                        ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
-                                      ),
-                                    ),
-                                    style: FlutterFlowTheme.subtitle2.override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: FlutterFlowTheme.darkText,
-                                    ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                                child: Text(
+                                  'Date of Birdth',
+                                  style: FlutterFlowTheme.bodyText2,
+                                ),
+                              ),
+                              FlutterFlowCalendar(
+                                color: FlutterFlowTheme.primaryColor,
+                                weekFormat: false,
+                                weekStartsMonday: false,
+                                initialDate:
+                                    editModelProfileUsersRecord.modelDoB,
+                                onChange: (DateTimeRange newSelectedDate) {
+                                  setState(() =>
+                                      calendarSelectedDay = newSelectedDate);
+                                },
+                                titleStyle: TextStyle(),
+                                dayOfWeekStyle: TextStyle(),
+                                dateStyle: TextStyle(),
+                                selectedDateStyle: TextStyle(),
+                                inactiveDateStyle: TextStyle(),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                                child: Text(
+                                  'Location',
+                                  style: FlutterFlowTheme.bodyText2,
+                                ),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Text(
+                                    'Hello World',
+                                    style: FlutterFlowTheme.bodyText1,
                                   ),
+                                  Text(
+                                    'Hello World',
+                                    style: FlutterFlowTheme.bodyText1,
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                      ),
+                                      child: FlutterFlowPlacePicker(
+                                        iOSGoogleMapsApiKey: '',
+                                        androidGoogleMapsApiKey: '',
+                                        webGoogleMapsApiKey: '',
+                                        onSelect: (place) => setState(
+                                            () => placePickerValue = place),
+                                        defaultText: 'Select Location',
+                                        icon: Icon(
+                                          Icons.place,
+                                          color: Colors.white,
+                                          size: 16,
+                                        ),
+                                        buttonOptions: FFButtonOptions(
+                                          width: 200,
+                                          height: 40,
+                                          color: FlutterFlowTheme.primaryColor,
+                                          textStyle: FlutterFlowTheme.subtitle2
+                                              .override(
+                                            fontFamily: 'Lexend Deca',
+                                            color: Colors.white,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -744,7 +814,6 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                           onPressed: () async {
                             final usersUpdateData = createUsersRecordData(
                               displayName: textController1?.text ?? '',
-                              email: textController3?.text ?? '',
                               bio: textController2?.text ?? '',
                               photoUrl: uploadedFileUrl,
                               modelMeasureBust: measureBustValue,
@@ -753,6 +822,11 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                               modelHairColor: eyeColorDropDownValue,
                               modelEyesColor: eyeColorDropDownValue,
                               modelHeightCm: heightCmValue,
+                              modelDoB: calendarSelectedDay.start,
+                              location: placePickerValue.latLng,
+                              city: placePickerValue.city,
+                              state: placePickerValue.state,
+                              country: placePickerValue.country,
                             );
                             await editModelProfileUsersRecord.reference
                                 .update(usersUpdateData);
