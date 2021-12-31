@@ -1,7 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
-import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_place_picker.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -31,7 +30,6 @@ class EditModelProfileWidget extends StatefulWidget {
 }
 
 class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
-  DateTimeRange calendarSelectedDay;
   String eyeColorDropDownValue;
   String hairColorDropDownValue;
   String uploadedFileUrl = '';
@@ -43,15 +41,6 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
   double measureHipsValue;
   var placePickerValue = FFPlace();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    calendarSelectedDay = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -675,22 +664,6 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                   style: FlutterFlowTheme.bodyText2,
                                 ),
                               ),
-                              FlutterFlowCalendar(
-                                color: FlutterFlowTheme.primaryColor,
-                                weekFormat: false,
-                                weekStartsMonday: false,
-                                initialDate:
-                                    editModelProfileUsersRecord.modelDoB,
-                                onChange: (DateTimeRange newSelectedDate) {
-                                  setState(() =>
-                                      calendarSelectedDay = newSelectedDate);
-                                },
-                                titleStyle: TextStyle(),
-                                dayOfWeekStyle: TextStyle(),
-                                dateStyle: TextStyle(),
-                                selectedDateStyle: TextStyle(),
-                                inactiveDateStyle: TextStyle(),
-                              ),
                             ],
                           ),
                         ),
@@ -736,12 +709,10 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                                         color: Colors.white,
                                       ),
                                       child: FlutterFlowPlacePicker(
-                                        iOSGoogleMapsApiKey:
-                                            'AIzaSyAxDiM-pb25n7v_Wri44kX9XADzL_b_cf0',
-                                        androidGoogleMapsApiKey:
-                                            'AIzaSyDI4tMlTv1pTvoQmFPFuJCO9gwbOxVEa7E',
+                                        iOSGoogleMapsApiKey: '',
+                                        androidGoogleMapsApiKey: '',
                                         webGoogleMapsApiKey:
-                                            'AIzaSyANDKgk6PrLJOP7Qawv3CxG8jlvVxXjrv8',
+                                            'AIzaSyBitpGwAVFERJqqJfDB1mziAYARyq3ipW0',
                                         onSelect: (place) => setState(
                                             () => placePickerValue = place),
                                         defaultText: 'Select Location',
@@ -804,7 +775,6 @@ class _EditModelProfileWidgetState extends State<EditModelProfileWidget> {
                               modelHairColor: eyeColorDropDownValue,
                               modelEyesColor: eyeColorDropDownValue,
                               modelHeightCm: heightCmValue,
-                              modelDoB: calendarSelectedDay.start,
                               location: placePickerValue.latLng,
                               city: placePickerValue.city,
                               state: placePickerValue.state,
