@@ -28,12 +28,15 @@ double validateRangeDbl(
 }
 
 String cm2ftStr(double cm) {
-  // convert cm to feet and inches string
-  double inches = cm * 0.39370104;
-  int feet = inches.floor();
-  double remainder = inches - feet;
-  inches = remainder * 12;
-  String feetStr = feet.toStringAsFixed(0);
-  String inchesStr = inches.toStringAsFixed(0);
-  return '$feetStr\' $inchesStr "';
+  // centimeters to feet and inches
+  double cms = 0;
+  if (cm == null) {
+    return '0\' 0"';
+  }
+  double feet = cm / 30.48;
+  double inches = feet % 1;
+  feet = feet - inches;
+
+  inches = inches * 12;
+  return '${feet.toStringAsFixed(0)}`$inches`';
 }
