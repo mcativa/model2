@@ -14,6 +14,7 @@ import 'm_a_i_n_candidates/m_a_i_n_candidates_widget.dart';
 import 'm_a_i_n_my_profile/m_a_i_n_my_profile_widget.dart';
 import 'm_a_i_n_home/m_a_i_n_home_widget.dart';
 import 'comp_card_template/comp_card_template_widget.dart';
+import 'testtrash/testtrash_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -108,6 +109,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'MAIN_MyProfile': MAINMyProfileWidget(),
       'MAINHome': MAINHomeWidget(),
       'CompCard_Template': CompCardTemplateWidget(),
+      'testtrash': TesttrashWidget(),
     };
     return Scaffold(
       body: tabs[_currentPage],
@@ -167,6 +169,14 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: 'CompCard',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
+              size: 24,
+            ),
+            label: 'Home',
             tooltip: '',
           )
         ],

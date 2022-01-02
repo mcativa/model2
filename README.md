@@ -1,4 +1,4 @@
-# model2
+# Model2
 
 A new Flutter project.
 

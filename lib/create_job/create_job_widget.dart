@@ -486,10 +486,12 @@ class _CreateJobWidgetState extends State<CreateJobWidget> {
                             ],
                           ),
                           child: FlutterFlowPlacePicker(
-                            iOSGoogleMapsApiKey: '',
-                            androidGoogleMapsApiKey: '',
+                            iOSGoogleMapsApiKey:
+                                'AIzaSyCyA6kZAooomYDgWXoAq28AdFcYBcdhOqs',
+                            androidGoogleMapsApiKey:
+                                'AIzaSyCyA6kZAooomYDgWXoAq28AdFcYBcdhOqs',
                             webGoogleMapsApiKey:
-                                'AIzaSyBitpGwAVFERJqqJfDB1mziAYARyq3ipW0',
+                                'AIzaSyCyA6kZAooomYDgWXoAq28AdFcYBcdhOqs',
                             onSelect: (place) =>
                                 setState(() => placePickerValue = place),
                             defaultText: 'Location',

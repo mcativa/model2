@@ -4,7 +4,7 @@
    <uses-permission android:name="android.permission.INTERNET"/>
 
    <application
-        android:label="model2"
+        android:label="Model2"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
