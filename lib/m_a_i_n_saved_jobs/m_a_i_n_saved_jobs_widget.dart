@@ -1,11 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../create_job/create_job_widget.dart';
+import '../create_event/create_event_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../job_post_applied/job_post_applied_widget.dart';
-import '../job_post_my_job_applicants/job_post_my_job_applicants_widget.dart';
+import '../x_job_post_applied/x_job_post_applied_widget.dart';
+import '../x_job_post_my_job_applicants/x_job_post_my_job_applicants_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -47,7 +47,7 @@ class _MAINSavedJobsWidgetState extends State<MAINSavedJobsWidget> {
               type: PageTransitionType.bottomToTop,
               duration: Duration(milliseconds: 250),
               reverseDuration: Duration(milliseconds: 250),
-              child: CreateJobWidget(),
+              child: CreateEventWidget(),
             ),
           );
         },
@@ -69,7 +69,7 @@ class _MAINSavedJobsWidgetState extends State<MAINSavedJobsWidget> {
                 type: PageTransitionType.bottomToTop,
                 duration: Duration(milliseconds: 250),
                 reverseDuration: Duration(milliseconds: 250),
-                child: CreateJobWidget(),
+                child: CreateEventWidget(),
               ),
             );
           },
@@ -193,7 +193,7 @@ class _MAINSavedJobsWidgetState extends State<MAINSavedJobsWidget> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      JobPostAppliedWidget(
+                                                      XJobPostAppliedWidget(
                                                     application:
                                                         listViewAppliedJobsRecord,
                                                     jobPostDetails:
@@ -406,7 +406,7 @@ class _MAINSavedJobsWidgetState extends State<MAINSavedJobsWidget> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                JobPostMyJobApplicantsWidget(
+                                                XJobPostMyJobApplicantsWidget(
                                               jobPostDetails:
                                                   listViewJobPostsRecord
                                                       .reference,

@@ -345,3 +345,8 @@ List<String> getStates(String country) {
   }
   return list;
 }
+
+int countListItems(List<DocumentReference> list) {
+  // Add your function code here!
+  return list.length;
+}

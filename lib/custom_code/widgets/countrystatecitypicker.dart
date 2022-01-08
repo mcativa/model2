@@ -48,6 +48,7 @@ class _CountrystatecitypickerState extends State<Countrystatecitypicker> {
               onCityChanged: (value) {
                 setState(() {
                   cityValue = value;
+                  //   FFLocalState ().city = value;
                 });
               },
             ),

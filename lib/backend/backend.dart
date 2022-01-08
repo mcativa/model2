@@ -14,6 +14,7 @@ import 'schema/chats_record.dart';
 import 'schema/chat_messages_record.dart';
 import 'schema/talent_photos_record.dart';
 import 'schema/talent_porfolio_record.dart';
+import 'schema/events_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,6 +31,7 @@ export 'schema/chats_record.dart';
 export 'schema/chat_messages_record.dart';
 export 'schema/talent_photos_record.dart';
 export 'schema/talent_porfolio_record.dart';
+export 'schema/events_record.dart';
 
 /// Functions to query JobPostsRecords (as a Stream and as a Future).
 Stream<List<JobPostsRecord>> queryJobPostsRecord(
@@ -187,6 +189,21 @@ Future<List<TalentPorfolioRecord>> queryTalentPorfolioRecordOnce(
         bool singleRecord = false}) =>
     queryCollectionOnce(
         TalentPorfolioRecord.collection, TalentPorfolioRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query EventsRecords (as a Stream and as a Future).
+Stream<List<EventsRecord>> queryEventsRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(EventsRecord.collection, EventsRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<EventsRecord>> queryEventsRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(EventsRecord.collection, EventsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

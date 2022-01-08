@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../m_a_i_n_my_model_profile/m_a_i_n_my_model_profile_widget.dart';
 import '../main.dart';
 import '../register/register_widget.dart';
 import 'package:flutter/material.dart';
@@ -267,7 +268,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      NavBarPage(initialPage: 'MAIN_MyProfile'),
+                                      MAINMyModelProfileWidget(),
                                 ),
                                 (r) => false,
                               );
@@ -316,7 +317,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      NavBarPage(initialPage: 'MAINHome'),
+                                      NavBarPage(initialPage: 'MAIN_Events'),
                                 ),
                               );
                             },

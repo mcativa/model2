@@ -3,27 +3,20 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../model_details/model_details_widget.dart';
+import '../s_e_a_r_c_h_candidates/s_e_a_r_c_h_candidates_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SEARCHCandidatesWidget extends StatefulWidget {
-  const SEARCHCandidatesWidget({Key key}) : super(key: key);
+class MAINModelsWidget extends StatefulWidget {
+  const MAINModelsWidget({Key key}) : super(key: key);
 
   @override
-  _SEARCHCandidatesWidgetState createState() => _SEARCHCandidatesWidgetState();
+  _MAINModelsWidgetState createState() => _MAINModelsWidgetState();
 }
 
-class _SEARCHCandidatesWidgetState extends State<SEARCHCandidatesWidget> {
-  List<UsersRecord> algoliaSearchResults = [];
-  TextEditingController textController;
+class _MAINModelsWidgetState extends State<MAINModelsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    textController = TextEditingController();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,21 +25,34 @@ class _SEARCHCandidatesWidgetState extends State<SEARCHCandidatesWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.darkText,
         automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30,
-          borderWidth: 1,
-          buttonSize: 60,
-          icon: Icon(
-            Icons.arrow_back_rounded,
+        title: Text(
+          'Candidates',
+          style: FlutterFlowTheme.title3.override(
+            fontFamily: 'Lexend Deca',
             color: FlutterFlowTheme.tertiaryColor,
-            size: 30,
           ),
-          onPressed: () async {
-            Navigator.pop(context);
-          },
         ),
-        actions: [],
+        actions: [
+          FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Icons.search_rounded,
+              color: FlutterFlowTheme.tertiaryColor,
+              size: 30,
+            ),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SEARCHCandidatesWidget(),
+                ),
+              );
+            },
+          ),
+        ],
         centerTitle: false,
         elevation: 0,
       ),
@@ -55,92 +61,11 @@ class _SEARCHCandidatesWidgetState extends State<SEARCHCandidatesWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 2),
-              child: Container(
-                width: double.infinity,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.darkText,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 3,
-                      color: Color(0x3C000000),
-                      offset: Offset(0, 2),
-                    )
-                  ],
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                        child: TextFormField(
-                          controller: textController,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Search candidates...',
-                            labelStyle: FlutterFlowTheme.subtitle1.override(
-                              fontFamily: 'Lexend Deca',
-                              color: FlutterFlowTheme.grayIcon400,
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 2,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 2,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                          ),
-                          style: FlutterFlowTheme.subtitle1.override(
-                            fontFamily: 'Lexend Deca',
-                            color: FlutterFlowTheme.tertiaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30,
-                      borderWidth: 1,
-                      buttonSize: 60,
-                      icon: Icon(
-                        Icons.search_sharp,
-                        color: FlutterFlowTheme.tertiaryColor,
-                        size: 30,
-                      ),
-                      onPressed: () async {
-                        setState(() => algoliaSearchResults = null);
-                        await UsersRecord.search(
-                          term: textController.text,
-                        )
-                            .then((r) => algoliaSearchResults = r)
-                            .onError((_, __) => algoliaSearchResults = [])
-                            .whenComplete(() => setState(() {}));
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
             Expanded(
-              child: FutureBuilder<List<UsersRecord>>(
-                future: UsersRecord.search(
-                  term: textController.text,
+              child: StreamBuilder<List<UsersRecord>>(
+                stream: queryUsersRecord(
+                  queryBuilder: (usersRecord) =>
+                      usersRecord.orderBy('display_name', descending: true),
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -277,9 +202,7 @@ class _SEARCHCandidatesWidgetState extends State<SEARCHCandidatesWidget> {
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
                                                   Text(
-                                                    containerUsersRecord
-                                                        .modelHeightCm
-                                                        .toString(),
+                                                    '${containerUsersRecord.modelMeasureBust.toString()}${containerUsersRecord.modelMeasureWaist.toString()}${containerUsersRecord.modelMeasureHips.toString()}',
                                                     style: FlutterFlowTheme
                                                         .bodyText2,
                                                   ),
@@ -289,7 +212,11 @@ class _SEARCHCandidatesWidgetState extends State<SEARCHCandidatesWidget> {
                                                             .fromSTEB(
                                                                 4, 0, 0, 0),
                                                     child: Text(
-                                                      'H: ',
+                                                      '\$${containerUsersRecord.uid}k'
+                                                          .maybeHandleOverflow(
+                                                        maxChars: 16,
+                                                        replacement: '…',
+                                                      ),
                                                       style: FlutterFlowTheme
                                                           .bodyText2
                                                           .override(

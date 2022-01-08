@@ -9,10 +9,9 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import 'package:model2/login/login_widget.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'm_a_i_n_events/m_a_i_n_events_widget.dart';
 import 'm_a_i_n_saved_jobs/m_a_i_n_saved_jobs_widget.dart';
-import 'm_a_i_n_candidates/m_a_i_n_candidates_widget.dart';
-import 'm_a_i_n_my_profile/m_a_i_n_my_profile_widget.dart';
-import 'm_a_i_n_home/m_a_i_n_home_widget.dart';
+import 'm_a_i_n_models/m_a_i_n_models_widget.dart';
 import 'comp_card_template/comp_card_template_widget.dart';
 import 'testtrash/testtrash_widget.dart';
 
@@ -93,7 +92,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPage = 'MAIN_MyProfile';
+  String _currentPage = 'MAIN_MyModelProfile';
 
   @override
   void initState() {
@@ -104,10 +103,9 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
+      'MAIN_Events': MAINEventsWidget(),
       'MAINSavedJobs': MAINSavedJobsWidget(),
-      'MAIN_Candidates': MAINCandidatesWidget(),
-      'MAIN_MyProfile': MAINMyProfileWidget(),
-      'MAINHome': MAINHomeWidget(),
+      'MAIN_Models': MAINModelsWidget(),
       'CompCard_Template': CompCardTemplateWidget(),
       'testtrash': TesttrashWidget(),
     };
@@ -115,6 +113,18 @@ class _NavBarPageState extends State<NavBarPage> {
       body: tabs[_currentPage],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.work_outline,
+              size: 24,
+            ),
+            activeIcon: Icon(
+              Icons.work_outlined,
+              size: 24,
+            ),
+            label: ' ',
+            tooltip: '',
+          ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.favorite_border,
@@ -134,30 +144,6 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             activeIcon: Icon(
               Icons.group,
-              size: 24,
-            ),
-            label: ' ',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outlined,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.person_rounded,
-              size: 24,
-            ),
-            label: '',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.work_outline,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.work_outlined,
               size: 24,
             ),
             label: ' ',

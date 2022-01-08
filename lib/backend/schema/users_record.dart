@@ -91,6 +91,18 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   String get modelHairColor;
 
   @nullable
+  String get prodCompanyName;
+
+  @nullable
+  String get profileFacebook;
+
+  @nullable
+  String get profileInstagram;
+
+  @nullable
+  String get prodHero;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -114,7 +126,11 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..city = ''
     ..state = ''
     ..country = ''
-    ..modelHairColor = '';
+    ..modelHairColor = ''
+    ..prodCompanyName = ''
+    ..profileFacebook = ''
+    ..profileInstagram = ''
+    ..prodHero = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -157,6 +173,10 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
           ..state = snapshot.data['state']
           ..country = snapshot.data['country']
           ..modelHairColor = snapshot.data['model_hair_color']
+          ..prodCompanyName = snapshot.data['prodCompanyName']
+          ..profileFacebook = snapshot.data['profileFacebook']
+          ..profileInstagram = snapshot.data['profileInstagram']
+          ..prodHero = snapshot.data['prodHero']
           ..reference = UsersRecord.collection.doc(snapshot.objectID),
       );
 
@@ -209,6 +229,10 @@ Map<String, dynamic> createUsersRecordData({
   String state,
   String country,
   String modelHairColor,
+  String prodCompanyName,
+  String profileFacebook,
+  String profileInstagram,
+  String prodHero,
 }) =>
     serializers.toFirestore(
         UsersRecord.serializer,
@@ -235,4 +259,8 @@ Map<String, dynamic> createUsersRecordData({
           ..city = city
           ..state = state
           ..country = country
-          ..modelHairColor = modelHairColor));
+          ..modelHairColor = modelHairColor
+          ..prodCompanyName = prodCompanyName
+          ..profileFacebook = profileFacebook
+          ..profileInstagram = profileInstagram
+          ..prodHero = prodHero));

@@ -1,14 +1,12 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
-import '../company_profile/company_profile_widget.dart';
 import '../edit_model_profile/edit_model_profile_widget.dart';
+import '../edit_producerl_profile/edit_producerl_profile_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
-import '../home_page_o_l_d/home_page_o_l_d_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -111,8 +109,15 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
 
                           final usersUpdateData = createUsersRecordData(
                             photoUrl: uploadedFileUrl,
+                            profileType: 'Model',
                           );
                           await currentUserReference.update(usersUpdateData);
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditModelProfileWidget(),
+                            ),
+                          );
                         },
                       ),
                     ),
@@ -336,7 +341,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => CompanyProfileWidget(),
+                            builder: (context) => EditProducerlProfileWidget(),
                           ),
                         );
                       },
@@ -386,46 +391,6 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                       ),
                     ),
                   ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 44),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomePageOLDWidget(),
-                              ),
-                            );
-                          },
-                          text: 'Skip for Now',
-                          options: FFButtonOptions(
-                            width: 130,
-                            height: 50,
-                            color: FlutterFlowTheme.background,
-                            textStyle: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Lexend Deca',
-                              color: FlutterFlowTheme.grayIcon400,
-                            ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: 12,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
             ],

@@ -314,8 +314,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          NavBarPage(initialPage: 'MAINHome'),
+                                      builder: (context) => NavBarPage(
+                                          initialPage: 'MAIN_Events'),
                                     ),
                                   );
                                 },
